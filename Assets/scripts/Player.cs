@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform center;
     [SerializeField] private Ui _ui;
-
     public bool _isDeath { set; get;}
     private Rigidbody2D _rigidbody;
 
@@ -28,13 +28,12 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var collisionTag = collision.tag;
-        if(collisionTag == "enemy")
+        if(collision.TryGetComponent<EnemyMove>(out EnemyMove enemyMove))
         {
             _isDeath = true;
             _ui.ConditionGame(true, 0.05f);
         }
-        if(collisionTag == "bonus")
+        if(collision.TryGetComponent<Bonus>(out Bonus bonus))
         {
             if(_isDeath == false)
             _ui.ScoreCount(1);

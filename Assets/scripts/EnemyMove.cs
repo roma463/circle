@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class controlmovesObj : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform _rotationObj;
@@ -32,20 +32,17 @@ public class controlmovesObj : MonoBehaviour
        
     }
 
-    public void Anim()
+    public void AnimationDeath()
     { 
-        //if (isDeath)
-        //    return;
         isDeath = true;
         _animator.SetTrigger("Active");
     }
     private void Update()
     {
         transform.Translate(Vector2.up * _speed * Time.deltaTime);
-        //_rotationObj.Rotate(_rotaionSpeed);
         if(Vector2.Distance(transform.position, _center.position) > 2)
         {
-            Anim();
+            AnimationDeath();
         }
     }
     private Vector3 rotation()

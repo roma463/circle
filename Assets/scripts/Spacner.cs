@@ -5,14 +5,14 @@ using System.Linq;
 public class Spacner : MonoBehaviour
 {
     [SerializeField] private GameObject _prefabEnemy;
-    [SerializeField] private controlmovesObj[] _bonuses;
-    private List<controlmovesObj> enemy = new List<controlmovesObj>();
+    [SerializeField] private EnemyMove[] _bonuses;
+    private List<EnemyMove> enemy = new List<EnemyMove>();
     private int R;
     private void Awake()
     {
         for (int i = 0; i < 50; i++)
         {
-            enemy.Add(Instantiate(_prefabEnemy, transform.position, Quaternion.identity).GetComponent<controlmovesObj>());
+            enemy.Add(Instantiate(_prefabEnemy, transform.position, Quaternion.identity).GetComponent<EnemyMove>());
             enemy[i].gameObject.SetActive(false);
         }
     }
@@ -38,7 +38,7 @@ public class Spacner : MonoBehaviour
         {
             if (enemy[i].gameObject.activeInHierarchy)
             {
-                enemy[i].Anim();
+                enemy[i].AnimationDeath();
             }
         }
     }

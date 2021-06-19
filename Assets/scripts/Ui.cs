@@ -4,12 +4,13 @@ public class Ui : MonoBehaviour
 {
     [SerializeField] private Text _scoreText;
     [SerializeField] private Text _displayMaxScore;
-    [SerializeField] private GameObject _gameOver;
+    [SerializeField] private GameObject _displayGameOver;
     [SerializeField] private Spacner _spavner;
     [SerializeField] private Player _player; 
-    [SerializeField] private GameObject _uiPlay;
+    [SerializeField] private GameObject _buttonPlay;
     private int _score;
     private int _MaxScore;
+
     private void Start()
     {
         _MaxScore = PlayerPrefs.GetInt("Score", 0);
@@ -35,7 +36,7 @@ public class Ui : MonoBehaviour
     public void ConditionGame(bool conitionLife, float timeScale)
     {
         PlayerPrefs.SetInt("Score", _MaxScore);
-        _gameOver.SetActive(conitionLife);
+        _displayGameOver.SetActive(conitionLife);
         Time.timeScale = timeScale;
     }
     public void Restart()
@@ -50,6 +51,6 @@ public class Ui : MonoBehaviour
     {
         _spavner.enabled = true;
         _player.enabled = true;
-        _uiPlay.SetActive(false);
+        _buttonPlay.SetActive(false);
     }
 }
